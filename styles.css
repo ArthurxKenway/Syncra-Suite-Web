@@ -191,33 +191,6 @@
   }
   
 
-  /* FOOTER  */
-
-  footer {
-    display: flex;
-    justify-content: center; /* Center the footer horizontally */
-    background-color: rgba(0, 0, 0, 0.8); /* Optional background for the footer */
-}
-
-.rights-section {
-    display: flex;
-    position: absolute;
-    bottom: 1px;
-    flex-direction: column; /* Stack children vertically */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    width: 100vw; /* Set the desired width */
-    padding: 20px; /* Optional padding */
-    color: white; /* Optional text color */
-    border-radius: 5px; /* Optional rounded corners */
-    background-color: black;
-}
-
-.inner-rights {
-    display: flex;
-    flex-direction: column; /* Stack the text elements vertically */
-    text-align: center; /* Center text alignment */
-}
 
 
 /* OTHER SOFTWARE  */
