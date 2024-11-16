@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Calculator</title>
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #00A0A7;
+}
+
+.form-group {
+    margin: 20px 0;
+}
+
+label {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 12px 30px;
+    background-color: #00A0A7;
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #115558;
+}
+
+.result {
+    display: none;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.result h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.result p {
+    font-size: 1.2em;
+    color: #333;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.result {
+    animation: fadeIn 0.5s ease-in;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Cost Calculator</h1>
+        <div class="form-group">
+            <label for="casePrice">Original Case Price (per case):</label>
+            <input type="number" id="casePrice" placeholder="Enter original case price" value="118.48">
+        </div>
+        
+        <div class="form-group">
+            <label for="promotionCases">Cases to Buy (Before Promotion):</label>
+            <input type="number" id="promotionCases" placeholder="Enter the number of cases you want to buy" value="7">
+        </div>
+        
+        <div class="form-group">
+            <label for="freeCases">Free Cases:</label>
+            <input type="number" id="freeCases" placeholder="Enter the number of free cases you get" value="3">
+        </div>
+
+        <div class="form-group">
+            <label for="shippingCost">Shipping Cost (%):</label>
+            <input type="number" id="shippingCost" placeholder="Enter shipping percentage" value="3.5">
+        </div>
+
+        <button id="calculateButton">Calculate</button>
+
+        <div id="result" class="result">
+            <h2>Results</h2>
+            <p><strong>Individual Cost:</strong> $<span id="costPerBox">0.00</span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calculateButton').addEventListener('click', function() {
+    // Get values from input fields
+    const casePrice = parseFloat(document.getElementById('casePrice').value);
+    const promotionCases = parseInt(document.getElementById('promotionCases').value);
+    const freeCases = parseInt(document.getElementById('freeCases').value);
+    const shippingPercentage = parseFloat(document.getElementById('shippingCost').value);
+
+    if (isNaN(casePrice) || isNaN(promotionCases) || isNaN(freeCases) || isNaN(shippingPercentage)) {
+        alert('Please fill out all fields with valid values.');
+        return;
+    }
+
+    // Calculate the total cost for 7 cases (before promotion)
+    const totalCost = casePrice * promotionCases;
+
+    // Total number of cases (7 paid, 3 free)
+    const totalCases = promotionCases + freeCases;
+
+    // Add the shipping cost (3.5%)
+    const shippingCost = (shippingPercentage / 100) * totalCost;
+    const totalCostWithShipping = totalCost + shippingCost;
+
+    // Calculate the cost per case
+    const costPerCase = totalCostWithShipping / totalCases;
+
+    // Calculate the cost per box (10 boxes per case)
+    const costPerBox = costPerCase / 10;
+
+    // Display the result
+    document.getElementById('costPerBox').textContent = costPerBox.toFixed(2);
+
+    // Show the result section
+    document.getElementById('result').style.display = 'block';
+});
+
+    </script>
+</body>
+</html>
